@@ -20,24 +20,24 @@ class PizzaSlicer(val config: Config,
 
         val slices = mutableListOf<Slice>()
         for (i in 0..(config.cols * config.rows)) {
-            println("processing slice $i")
+            //println("processing slice $i")
             val center = randomCenter()
-            println("new center: $center")
+            //println("new center: $center")
             if (center == null) {
-                println("no new center found!")
+                //println("no new center found!")
                 return slices
             }
             var slice = Slice(center.copy(), center.copy())
             while (true) {
                 val increasedSlice = increase(slice)
                 if (increasedSlice == null) {
-                    println("no grow possible!")
+                    //println("no grow possible!")
                     if (isSliceCompleted(slice)) {
-                        println("slice before finished!")
+                        //println("slice before finished!")
                         slices.add(slice)
                         commitProcessedCells(slice)
                     } else {
-                        println("center cannot result in slice!")
+                        //println("center cannot result in slice!")
                     }
                     break
                 }
@@ -48,7 +48,7 @@ class PizzaSlicer(val config: Config,
     }
 
     private fun commitProcessedCells (slice: Slice) {
-        println("commit slice $slice")
+        //println("commit slice $slice")
         for (row in (slice.ul.row)..(slice.lr.row)) {
             for (col in (slice.ul.col)..(slice.lr.col)) {
                 notProcessed[row]!!.remove(col)
